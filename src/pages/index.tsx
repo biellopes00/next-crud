@@ -1,10 +1,19 @@
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import Layout from '@/components/Layout'
+import Table from '@/components/Table'
+import Client from '@/core/Client'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const clients = [
+    new Client('Gabriel', 26, '1'),
+    new Client('Suellen', 27, '2'),
+    new Client('Glauce', 64, '3'),
+    new Client('Dobby', 17, '4'),
+    new Client('Suelli', 68, '5'),
+  ]
+
   return (
     <div className={`
     flex h-screen justify-center items-center 
@@ -12,7 +21,7 @@ export default function Home() {
     text-white
    `}>
       <Layout title='Register'>
-        <span>conteudo</span>
+        <Table clients={clients}></Table>
       </Layout>
     </div>
   )
