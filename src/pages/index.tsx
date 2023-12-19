@@ -2,6 +2,8 @@ import { Inter } from 'next/font/google'
 import Layout from '@/components/Layout'
 import Table from '@/components/Table'
 import Client from '@/core/Client'
+import Button from '@/components/Button'
+import Form from '@/components/Form'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,10 +30,19 @@ export default function Home() {
     text-white
    `}>
       <Layout title='Register'>
-        <Table clients={clients}
-          clientSelected={clientSelected}
-          deletedClient={deletedClient}
-        />
+        <div className="flex justify-end">
+          <Button color="green" className="mb-4">New Client</Button>
+
+        </div>
+        {
+          <Table clients={clients}
+            clientSelected={clientSelected}
+            deletedClient={deletedClient}
+          />
+        }
+        <Form client={clients[1]}>
+
+        </Form>
       </Layout>
     </div>
   )
