@@ -4,9 +4,9 @@ export default class Client {
     #age: number;
 
     constructor(name: string, age: number, id: string = null) {
-        this.#id = id;
         this.#name = name;
         this.#age = age;
+        this.#id = id;
     }
 
     static empty() {

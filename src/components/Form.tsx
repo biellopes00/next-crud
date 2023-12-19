@@ -1,10 +1,12 @@
 import { useState } from "react";
 import Input from "./Input";
-import Client from "@/core/Client";
+import Client from "../core/Client";
 import Button from "./Button";
 
 interface FormProps {
     client: Client
+    onChange?: (client: Client) => void
+    canceled?: () => void
 }
 
 export default function Form(props: FormProps) {
@@ -36,10 +38,10 @@ export default function Form(props: FormProps) {
 
             />
             <div className="flex justify-end mt-7">
-                <Button color="blue" className="mr-2">
-                    { id ? 'Change' : 'Save' }
+                <Button color="blue" className="mr-2" onClick={() => props.onChange?.(new Client(name, +age, id))}>
+                    {id ? 'Change' : 'Save'}
                 </Button>
-                <Button>
+                <Button onClick={props.canceled}>
                     Cancel
                 </Button>
             </div>
