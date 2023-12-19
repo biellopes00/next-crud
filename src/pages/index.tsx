@@ -14,6 +14,13 @@ export default function Home() {
     new Client('Suelli', 68, '5'),
   ]
 
+  function clientSelected(client: Client) {
+
+  }
+  function deletedClient(client: Client) {
+
+  }
+
   return (
     <div className={`
     flex h-screen justify-center items-center 
@@ -21,7 +28,10 @@ export default function Home() {
     text-white
    `}>
       <Layout title='Register'>
-        <Table clients={clients}></Table>
+        <Table clients={clients}
+          clientSelected={clientSelected}
+          deletedClient={deletedClient}
+        />
       </Layout>
     </div>
   )
