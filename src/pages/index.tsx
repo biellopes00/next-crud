@@ -1,50 +1,21 @@
-import { Inter } from 'next/font/google'
 import Layout from '../components/Layout'
 import Table from '../components/Table'
-import Client from '../core/Client'
 import Button from '../components/Button'
 import Form from '../components/Form'
-import { useEffect, useState } from 'react'
-import ClientRepository from '../core/ClientRepository'
-import ClientCollection from '../core/db/ClientCollection'
+import useClients from '../hooks/useClients'
 
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
-  const repo: ClientRepository = new ClientCollection()
-
-  const [visible, setVisible] = useState<'table' | 'form'>('table')
-  const [client, setClient] = useState<Client>(Client.empty)
-  const [clients, setClients] = useState<Client[]>([])
-
-  useEffect(() => {
-    getClients
-  }, [])
-
-  function getClients() {
-    repo.getClients().then(clients => {
-      setClients(clients)
-      setVisible('table')
-    })
-  }
-  function clientSelected(client: Client) {
-    setClient(client);
-    setVisible('form')
-  }
-  function deletedClient(client: Client) {
-
-  }
-
-  function newClient() {
-    setClient(Client.empty)
-    setVisible('form')
-  }
-  async function saveClient(client: Client) {
-    await repo.save(client)
-    getClients()
-  }
-
+  const {
+    clientSelected,
+    deletedClient,
+    client,
+    clients,
+    newClient,
+    saveClient,
+    visibleTable,
+    showTable } = useClients()
 
   return (
     <div className={`
@@ -53,7 +24,7 @@ export default function Home() {
     text-white
    `}>
       <Layout title='Register'>
-        {visible === 'table' ? (
+        {visibleTable ? (
           <>
             <div className="flex justify-end">
               <Button color="green" className="mb-4"
@@ -72,7 +43,7 @@ export default function Home() {
           <Form
             client={client}
             onChange={saveClient}
-            canceled={() => setVisible('table')}
+            canceled={() => showTable}
           />
         )}
       </Layout>

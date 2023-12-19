@@ -37,7 +37,7 @@ export default class CollectionClient implements ClientRepository{
     
     private colletion(){
         return firebase
-        .firestore().collection('clients')
-        .withConverter(this.#conversor)
+            .firestore().collection('clients')
+            .withConverter(this.#conversor)
     }
 }
